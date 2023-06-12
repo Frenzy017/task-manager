@@ -1,11 +1,11 @@
 const assert = require('assert');
 const {JSDOM} = require('jsdom');
 const {LocalStorage} = require('node-localstorage');
-const Blob = require('blob-polyfill').Blob; // Import the Blob polyfill
+const Blob = require('blob-polyfill').Blob;
 const {window} = new JSDOM('');
 require('jsdom-global')()
 
-// Create a new instance of LocalStorage
+// Create a new instance of LocalStorage to work as a mockup for the tests
 const localStorage = new LocalStorage('./scratch');
 const sinon = require('sinon');
 
@@ -27,9 +27,9 @@ const dom = new JSDOM(`
 global.window = dom.window;
 global.document = dom.window.document;
 global.localStorage = localStorage;
-global.Blob = Blob; // Assign the Blob polyfill
+global.Blob = Blob;
 
-// Include your JavaScript code
+// Here I'm importing the functions from the script file
 const {
     createTask,
     removeTask,
@@ -52,7 +52,6 @@ describe('Task Management', function () {
                 name: 'Task 1',
                 isCompleted: false,
             };
-
             createTask(task);
 
             const taskElement = dom.window.document.getElementById('1');
@@ -72,6 +71,7 @@ describe('Task Management', function () {
             localStorage.setItem('tasks', JSON.stringify(tasks));
 
             // Mock the URL object
+            // Decided to use sinon library since I could not figure how to do it only with Mocha after a lot of testing
             const URLMock = {
                 createObjectURL: sinon.stub(),
                 revokeObjectURL: sinon.stub(),
@@ -80,12 +80,11 @@ describe('Task Management', function () {
 
             exportData();
 
-            // Verify that createObjectURL is called with the correct arguments
+            // Checking createObjectURL if it is  called with the correct arguments
             sinon.assert.calledOnceWithExactly(
                 URLMock.createObjectURL,
                 sinon.match.instanceOf(Blob)
             );
-
             // Verify that revokeObjectURL is called
             sinon.assert.calledOnce(URLMock.revokeObjectURL);
         });
@@ -138,39 +137,37 @@ describe('Task Management', function () {
             tasks.push(task);
             localStorage.setItem('tasks', JSON.stringify(tasks));
 
-            // Create a task element in the DOM
             createTask(task);
 
-            // Retrieve the task element
+
             const taskElement = dom.window.document.getElementById(task.id);
 
-            // Simulate clicking the edit button
+            // Replicate clicking
             const editButton = taskElement.querySelector('.edit-task');
             editTask(editButton.parentElement);
 
-            // Retrieve the updated task element
+            // Replicate updating element
             const updatedTaskElement = dom.window.document.getElementById(task.id);
 
-            // Verify that the input field is displayed
+            // Check that input is correctly displayed
             const inputElement = updatedTaskElement.querySelector('.editControlWrapper input');
             assert.ok(inputElement);
 
-            // Simulate entering a new task name
+            // Replicate entering value
             inputElement.value = 'Updated Task 1';
 
-            // Simulate clicking the confirm button
+            // Replicate clicking on the confirm button
             const confirmButton = updatedTaskElement.querySelector('.editControlWrapper button');
             confirmButton.parentElement.querySelector('button').click();
 
-            // Verify that the task name is updated in the DOM
+            // Check that the task name is in DOM
             const taskNameElement = updatedTaskElement.querySelector('.content-editable');
             assert.strictEqual(taskNameElement.textContent, 'Updated Task 1');
 
-            // Verify that the task name is updated in localStorage
+            // Check if the task name is updated in localStorage
             const updatedTasks = JSON.parse(localStorage.getItem('tasks'));
             const updatedTask = updatedTasks.find(t => t.id === task.id);
             assert.strictEqual(updatedTask.name, 'Updated Task 1');
         });
     });
-
 });
