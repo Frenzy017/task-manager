@@ -11,6 +11,7 @@ The goal of this repo is to practice the following skill sets:
 - Testing using Mocha: `describe`, `assert`,
 - How to handle LocalStorage using methods such as: `setItem`, `getItem`, `clear`
 - How to configure / download modules
+- How to export JSON format locally
 
 ## Summary
 
