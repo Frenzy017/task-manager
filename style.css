@@ -1,0 +1,206 @@
+:root {
+    --clr-bg: radial-gradient(circle, rgba(255, 255, 255, 1) 0%, rgba(255, 203, 203, 1) 80%);
+    --clr-red: #fca5a5;
+    --clr-white: white;
+    --clr-light-red: #fee2e2;
+    --clr-solid-black: black;
+    --base-font: 'Lobster Two', cursive;
+    --tasks-font: 'EB Garamond', serif;
+    --button-font: 'Alkatra', cursive;
+    --footer-font: 'Fira Sans', sans-serif;
+    --border-radius: 0.5rem;
+}
+
+@media (min-width: 600px) {
+    body {
+        min-height: 100vh;
+        min-width: 100vh;
+        display: grid;
+        place-items: center;
+    }
+}
+
+body {
+    font-size: 1.125rem;
+    line-height: 2.2;
+    background: var(--clr-bg);
+}
+
+main {
+    width: min(70ch, 100% - 4rem);
+    margin-inline: auto;
+}
+
+header {
+    display: grid;
+    place-content: center;
+    line-height: 1.5;
+}
+
+h1 {
+    font-family: var(--base-font);
+    font-size: 40px;
+    letter-spacing: 0.150rem;
+    opacity: 0.7;
+}
+
+section {
+    display: grid;
+    padding-left: 5rem;
+    font-family: var(--tasks-font);
+    font-size: 25px;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 2rem;
+    margin: 20px;
+}
+
+ul {
+    list-style-type: none;
+}
+
+button {
+    transition: all 0.2s ease-out;
+    font-family: var(--button-font);
+    border-color: var(--clr-solid-black);
+    background-color: var(--clr-light-red);
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    transform: scale(1.1);
+}
+
+footer {
+    font-family: var(--footer-font);
+    font-weight: bold;
+}
+
+.main-content {
+    display: grid;
+    border: 2px solid black;
+    border-radius: var(--border-radius);
+    min-width: 600px;
+    min-height: 600px;
+    background-color: var(--clr-red);
+    font-family: Arial, Bahnschrift, sans-serif;
+    margin-inline: 1rem;
+    box-shadow: 0px -2px 66px 6px rgba(186, 182, 186, 1);
+}
+
+#todo-form {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+}
+
+#task-input {
+    min-width: 200px;
+    min-height: 30px;
+    border: 2px solid white;
+    border-radius: 0.5rem;
+    font-family: inherit;
+    font-size: inherit;
+    color: black;
+    outline: none;
+    background: none;
+    transition: all 160ms ease-in;
+}
+
+#task-input:hover {
+    border-color: #fecaca;
+}
+
+#task-input:focus {
+    border-color: black;
+}
+
+.task-label {
+    color: #fff;
+    padding-left: 0.500rem;
+}
+
+.taskWrapper {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+}
+
+.taskWrapper > button {
+    width: 70px;
+    height: 30px;
+}
+
+.taskWrapper input[type="checkbox"] {
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: #fff;
+}
+
+.taskWrapper input[type="checkbox"] {
+    display: grid;
+    place-items: center;
+    max-width: 1rem;
+
+}
+
+.taskWrapper input[type="checkbox"]::before {
+    content: "";
+    min-width: 1rem;
+    min-height: 1rem;
+    transform: scale(0);
+    transition: 120ms transform ease-in-out;
+    box-shadow: inset 1em 1em black;
+}
+
+.taskWrapper input[type="checkbox"]:checked::before {
+    transform: scale(1);
+}
+
+.taskWrapper input[type="checkbox"]::before {
+    transform-origin: bottom left;
+    clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+}
+
+.editControlWrapper {
+    display: flex;
+    gap: 20px;
+}
+
+.editControlWrapper > input {
+    min-width: 200px;
+    border-radius: 50px;
+    border-width: 3px;
+    border-color: var(--clr-solid-black);
+    outline: none;
+    background-color: var(--clr-white);
+}
+
+.add {
+    width: 100px;
+    height: 35px;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.task-element {
+    display: flex;
+    flex-direction: column;
+}
+
+.extract-data {
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    padding-bottom: 20px;
+}
+
+.unfinished-task {
+    font-weight: bold;
+}
+
+
+
