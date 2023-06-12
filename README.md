@@ -47,9 +47,14 @@ npm i node
 
 - Then you can open the html file locally or download the live server extension and run it
 
--Search for
+- Search for:
 ```sh
 live server extension vs code
 ```
 - Download it and then open the index.html file until it shows that it's using localhost port
+
+- You can also try the localStorage test mockup by typing in terminal:
+```sh
+mocha test.js
+```
 - Enjoy!
