@@ -1,0 +1,12 @@
+{
+  "dependencies": {
+    "blob-polyfill": "^7.0.20220408",
+    "sinon": "^15.1.0"
+  },
+  "devDependencies": {
+    "jsdom": "^22.1.0",
+    "jsdom-global": "3.0.2",
+    "mock-local-storage": "^1.1.24",
+    "node-localstorage": "^2.2.1"
+  }
+}
