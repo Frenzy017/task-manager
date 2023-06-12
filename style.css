@@ -24,7 +24,7 @@ body {
     font-size: 1.125rem;
     line-height: 2.2;
     background: var(--clr-bg);
-    overflow: hidden;
+    overflow: auto;
 }
 
 main {

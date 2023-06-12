@@ -42,7 +42,14 @@ git clone https://github.com/Frenzy017/task-manager.git
 - Open terminal and run:
 
 ```sh
-npm i node
+npm
+ i node
+```
+
+Install mocha globally 
+
+```sh
+npm install --global mocha
 ```
 
 - Then you can open the html file locally or download the live server extension and run it
