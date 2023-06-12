@@ -7,7 +7,7 @@
     --base-font: 'Lobster Two', cursive;
     --tasks-font: 'EB Garamond', serif;
     --button-font: 'Alkatra', cursive;
-    --footer-font: 'Fira Sans', sans-serif;
+    --footer-font: Verdana;
     --border-radius: 0.5rem;
 }
 
@@ -24,6 +24,7 @@ body {
     font-size: 1.125rem;
     line-height: 2.2;
     background: var(--clr-bg);
+    overflow: hidden;
 }
 
 main {
@@ -74,9 +75,25 @@ button:hover {
 }
 
 footer {
+    display: flex;
+    justify-content: center;
+    align-content: center;
     font-family: var(--footer-font);
-    font-weight: bold;
+    font-size: 20px;
+    color: black;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    letter-spacing: 5px;
+    transition: all 0.5s ease-in-out;
 }
+
+footer:hover {
+    color: crimson;
+    letter-spacing: 1px;
+    transition: all 0.8s ease-in-out;
+}
+
 
 .main-content {
     display: grid;
@@ -144,7 +161,6 @@ footer {
     display: grid;
     place-items: center;
     max-width: 1rem;
-
 }
 
 .taskWrapper input[type="checkbox"]::before {
@@ -201,6 +217,5 @@ footer {
 .unfinished-task {
     font-weight: bold;
 }
-
 
 
