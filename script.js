@@ -69,6 +69,7 @@ function checkBoxControl(e) {
     const taskToEdit = tasks.find((item) => item.id === Number(liElement.id));
     taskToEdit.isCompleted = e.checked;
 
+
     // Editing the data in localStorage by spreading so we can modify the id's
     localStorage.setItem("tasks", JSON.stringify(
         [...tasks]
@@ -79,12 +80,15 @@ function checkBoxControl(e) {
 
 function removeTask(e) {
     // removing the current event which is the li value with ID
-    e.remove()
+    if (e instanceof Element && e.parentElement) {
+        // Removing the current event which is the li value with ID
+        e.remove();
 
-    // removing the event in localStorage
-    tasks.splice(e, 1);
-    localStorage.setItem("tasks", JSON.stringify(tasks));
-    countTasks();
+        // Removing the event in localStorage
+        tasks = tasks.filter((task) => task.id !== Number(e.id));
+        localStorage.setItem("tasks", JSON.stringify(tasks));
+        countTasks();
+    }
 }
 
 function editTask(e) {
@@ -128,8 +132,8 @@ function editTask(e) {
 }
 
 function countTasks() {
-    const completedTasks = tasks.filter((task) => task.isCompleted === true)
-    remainingTaskElement.textContent = `${tasks.length - completedTasks.length}`;
+    const remainingTasks = tasks.filter(task => !task.isCompleted).length;
+        remainingTaskElement.textContent = remainingTasks.toString();
 }
 
 function exportData() {
@@ -156,4 +160,13 @@ function exportData() {
 
     document.body.removeChild(anchorElement);
     URL.revokeObjectURL(url);
+}
+
+
+module.exports = {
+    createTask,
+    removeTask,
+    exportData,
+    countTasks,
+    editTask
 }
