@@ -133,7 +133,7 @@ function editTask(e) {
 
 function countTasks() {
     const remainingTasks = tasks.filter(task => !task.isCompleted).length;
-        remainingTaskElement.textContent = remainingTasks.toString();
+    remainingTaskElement.textContent = remainingTasks.toString();
 }
 
 function exportData() {
@@ -161,7 +161,6 @@ function exportData() {
     document.body.removeChild(anchorElement);
     URL.revokeObjectURL(url);
 }
-
 
 module.exports = {
     createTask,
